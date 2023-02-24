@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>F:/Ali/Csharp/65_72_Al_Alawin_Ali_MONOGAME/p65_72_Al_Alawin_Ali/p65_72_Al_Alawin_Ali/Content/asteroid.png</File>
+    <File>F:/Ali/Csharp/65_72_Al_Alawin_Ali_MONOGAME/p65_72_Al_Alawin_Ali/p65_72_Al_Alawin_Ali/Content/background.png</File>
+    <File>F:/Ali/Csharp/65_72_Al_Alawin_Ali_MONOGAME/p65_72_Al_Alawin_Ali/p65_72_Al_Alawin_Ali/Content/heart.png</File>
+    <File>F:/Ali/Csharp/65_72_Al_Alawin_Ali_MONOGAME/p65_72_Al_Alawin_Ali/p65_72_Al_Alawin_Ali/Content/panel.png</File>
+    <File>F:/Ali/Csharp/65_72_Al_Alawin_Ali_MONOGAME/p65_72_Al_Alawin_Ali/p65_72_Al_Alawin_Ali/Content/rocket.png</File>
+    <File>F:/Ali/Csharp/65_72_Al_Alawin_Ali_MONOGAME/p65_72_Al_Alawin_Ali/p65_72_Al_Alawin_Ali/Content/spent_heart.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>
