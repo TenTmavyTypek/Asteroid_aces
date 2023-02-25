@@ -17,14 +17,16 @@ namespace p65_72_Al_Alawin_Ali
         Texture2D spent_heartTexture;
 
         int life_count = 3;
-        int limit;
         float immortal = 0;
         bool isImmortal = false;
+
+        Color rocketColor = Color.White;
 
         Vector2 rocketPosition;
 
         float rocketSpeed;
         float asteroidSpawn = 0;
+        float layer = 0f;
 
         bool isFullScreen = false;
 
@@ -90,10 +92,15 @@ namespace p65_72_Al_Alawin_Ali
             if (isImmortal)
             {
                 immortal += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                //layer += 20*(float)gameTime.ElapsedGameTime.TotalSeconds;
+                rocketColor = Color.Gray;
                 if( immortal >= 3 ) {
+                    //layer = 0;
+                    rocketColor = Color.White;
                     isImmortal = false;
                     immortal = 0;
                 }
+                
             }
 
             //update vykreslenia v classe Asteroidy za každý asteroid v liste
@@ -196,6 +203,8 @@ namespace p65_72_Al_Alawin_Ali
                 {
                     if(!isImmortal)
                     {
+                        rocketPosition.X = graphics.PreferredBackBufferWidth / 2; 
+                        rocketPosition.Y = graphics.PreferredBackBufferHeight - 200;
                         life_count -= 1;
                         rocketHit = true;
                         isImmortal = true;
@@ -207,7 +216,7 @@ namespace p65_72_Al_Alawin_Ali
             if (asteroidSpawn >= 1)
             {
                 asteroidSpawn = 0;
-                if (asteroids.Count < 4)
+                if (asteroids.Count < 10)
                 {
                     asteroids.Add(
                         new Asteroidy(
@@ -252,12 +261,12 @@ namespace p65_72_Al_Alawin_Ali
                 rocketTexture, // img rakety
                 rocketPosition, // pozícia rakety
                 null, // Štvorec ?
-                Color.White, 
+                rocketColor, 
                 0f, // Uhol otočenia
                 new Vector2(rocketTexture.Width / 2, rocketTexture.Height / 2),// prenastavenie pozície rakety relatívne na stred namiesto na roh
                 Vector2.One,// Veľkosť (scale)
                 SpriteEffects.None,// Efekty spritov 
-                0f); // hĺbka vo vrstvách
+                layer); // hĺbka vo vrstvách
 
             // Asteroid(y)
             foreach (Asteroidy asteroid in asteroids)
@@ -269,32 +278,34 @@ namespace p65_72_Al_Alawin_Ali
             // InfoPanel
             spriteBatch.Draw(panelTexture, new Rectangle(300, 850, 1000, 150), Color.White);
 
+
             // Životy
             if (life_count == 3)
             {
-                limit = 850;
+                for (int i = 650; i <= 850; i += 100)
+                {
+                    spriteBatch.Draw(heartTexture, new Rectangle(i, 885, 80, 80), Color.White);
+                }
             }
             if (life_count == 2)
             {
-                limit = 750;
+                spriteBatch.Draw(spent_heartTexture, new Rectangle(850, 885, 80, 80), Color.White);
+                spriteBatch.Draw(heartTexture, new Rectangle(750, 885, 80, 80), Color.White);
+                spriteBatch.Draw(heartTexture, new Rectangle(650, 885, 80, 80), Color.White);
             }
             if (life_count == 1)
             {
-                limit = 650;
+                spriteBatch.Draw(spent_heartTexture, new Rectangle(850, 885, 80, 80), Color.White);
+                spriteBatch.Draw(spent_heartTexture, new Rectangle(750, 885, 80, 80), Color.White);
+                spriteBatch.Draw(heartTexture, new Rectangle(650, 885, 80, 80), Color.White);
             }
             if (life_count == 0)
             {
-                limit = 0;
+                for (int i = 650; i <= 850; i += 100)
+                {
+                    spriteBatch.Draw(spent_heartTexture, new Rectangle(i, 885, 80, 80), Color.White);
+                }
             }
-
-            for (int i = 650; i <= limit ; i += 100)
-            {
-                spriteBatch.Draw(heartTexture, new Rectangle(i, 885, 80, 80), Color.White);
-            }
-
-            
-
-            // Minuté životy
 
            
 
