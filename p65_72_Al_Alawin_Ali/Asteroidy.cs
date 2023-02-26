@@ -12,26 +12,23 @@ namespace p65_72_Al_Alawin_Ali
     {
         public Texture2D texture;
        
-
-
         public Vector2 position;
         public Vector2 speed;
         
-
         public bool isVisible = true;
 
         Random random = new Random();
-        int randX_speed, randY_speed;
+        int randX_speed, Y_speed;
 
         public Asteroidy(Texture2D newTexture, Vector2 newPosition)
         {
             texture = newTexture;
             position = newPosition;
 
-            randX_speed = random.Next(0,0);
-            randY_speed = random.Next(5,5);
+            randX_speed = random.Next(-2,2);
+            Y_speed = 9;
 
-            speed = new Vector2(randX_speed, randY_speed);
+            speed = new Vector2(randX_speed, Y_speed);
         }
 
         public void Update(GraphicsDevice graphics)

@@ -29,3 +29,9 @@ F:\Ali\Csharp\65_72_Al_Alawin_Ali_MONOGAME\p65_72_Al_Alawin_Ali\p65_72_Al_Alawin
 F:\Ali\Csharp\65_72_Al_Alawin_Ali_MONOGAME\p65_72_Al_Alawin_Ali\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\panel.xnb
 F:\Ali\Csharp\65_72_Al_Alawin_Ali_MONOGAME\p65_72_Al_Alawin_Ali\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\heart.xnb
 F:\Ali\Csharp\65_72_Al_Alawin_Ali_MONOGAME\p65_72_Al_Alawin_Ali\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\spent_heart.xnb
+F:\Ali\Csharp\65_72_Al_Alawin_Ali_MONOGAME\p65_72_Al_Alawin_Ali\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\hardOverlay.xnb
+F:\Ali\Csharp\65_72_Al_Alawin_Ali_MONOGAME\p65_72_Al_Alawin_Ali\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\mildOverlay.xnb
+F:\Ali\Csharp\65_72_Al_Alawin_Ali_MONOGAME\p65_72_Al_Alawin_Ali\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\coin.xnb
+F:\Ali\Csharp\65_72_Al_Alawin_Ali_MONOGAME\p65_72_Al_Alawin_Ali\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\pauseMenu.xnb
+F:\Ali\Csharp\65_72_Al_Alawin_Ali_MONOGAME\p65_72_Al_Alawin_Ali\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\Score.xnb
+F:\Ali\Csharp\65_72_Al_Alawin_Ali_MONOGAME\p65_72_Al_Alawin_Ali\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\font.xnb

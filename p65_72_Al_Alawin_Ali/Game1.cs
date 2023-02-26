@@ -4,41 +4,55 @@ using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System;
 using System.Security.Cryptography.X509Certificates;
+using static System.Formats.Asn1.AsnWriter;
+using System.Threading.Tasks.Sources;
 
 namespace p65_72_Al_Alawin_Ali
 {
     public class Game1 : Game
     {
-        Texture2D rocketTexture;
-        Texture2D asteroidTexture;
+        // User Interface
         Texture2D backgroundTexture;
+        Texture2D mildOverlayTexture;
+        Texture2D hardOverlayTexture;
         Texture2D panelTexture;
+        Texture2D pauseTexture;
+        bool isFullScreen = false;
+        SpriteFont font;
+        int score = 0;
+        
+        // Raketa
+        Texture2D rocketTexture;
+        Vector2 rocketPosition;
+        Color rocketColor = Color.White;
+        float rocketSpeed;
+
+        // Asteroidy
+        List<Asteroidy> asteroids = new List<Asteroidy>();
+        Texture2D asteroidTexture;
+        float asteroidSpawn = 0;
+        
+        // Mince
+        List<Coins> coins = new List<Coins>();
+        Texture2D coinTexture;
+        float coinSpawn = 0;
+        int coinCount = 0;
+
+        // Životy
+        List<Hearts> hearts = new List<Hearts>();
         Texture2D heartTexture;
         Texture2D spent_heartTexture;
-
-        int life_count = 3;
+        float heartSpawnOdds = 0;
+        float heartSpawn = 0;
         float immortal = 0;
         bool isImmortal = false;
+        int lifeCount = 3;
 
-        Color rocketColor = Color.White;
-
-        Vector2 rocketPosition;
-
-        float rocketSpeed;
-        float asteroidSpawn = 0;
-        float layer = 0f;
-
-        bool isFullScreen = false;
-
+        // Ostatné
+        bool gamePaused = false;
+        Random random = new Random();
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
-
-
-        List<Asteroidy> asteroids = new List<Asteroidy>();
-
-        Random random = new Random();
-
-        bool rocketHit = false;
 
         public Game1()
         {
@@ -69,12 +83,25 @@ namespace p65_72_Al_Alawin_Ali
             spriteBatch = new SpriteBatch(GraphicsDevice); //Načítanie sprite batchu -- obsahuje metódy na kreslenie
 
             //Načítanie obrázkov
-            rocketTexture = Content.Load<Texture2D>("rocket");
+
+            // UI
             backgroundTexture = Content.Load<Texture2D>("background");
+            hardOverlayTexture = Content.Load<Texture2D>("hardOverlay");
+            mildOverlayTexture = Content.Load<Texture2D>("mildOverlay");
             panelTexture = Content.Load<Texture2D>("panel");
+            pauseTexture = Content.Load<Texture2D>("pauseMenu");
+            font = Content.Load<SpriteFont>("font");
+            
+            // Životy
             heartTexture = Content.Load<Texture2D>("heart");
             spent_heartTexture = Content.Load<Texture2D>("spent_heart");
 
+            // Raketa
+            rocketTexture = Content.Load<Texture2D>("rocket");
+
+            // Objekty
+            asteroidTexture = Content.Load<Texture2D>("asteroid");
+            coinTexture = Content.Load<Texture2D>("coin");
         }
 
         void ControlFullScreenMode(bool becomeFullscreen)
@@ -86,54 +113,9 @@ namespace p65_72_Al_Alawin_Ali
 
         protected override void Update(GameTime gameTime) //Prebehne niekoľko krát za sekundu
         {
-            //Generovanie asteroidov
-            asteroidSpawn += (float)gameTime.ElapsedGameTime.TotalSeconds; //Asteroid spawn sa zmení na 1 každú sekundu
-
-            if (isImmortal)
-            {
-                immortal += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                //layer += 20*(float)gameTime.ElapsedGameTime.TotalSeconds;
-                rocketColor = Color.Gray;
-                if( immortal >= 3 ) {
-                    //layer = 0;
-                    rocketColor = Color.White;
-                    isImmortal = false;
-                    immortal = 0;
-                }
-                
-            }
-
-            //update vykreslenia v classe Asteroidy za každý asteroid v liste
-            foreach (Asteroidy asteroid in asteroids)
-            {
-                asteroid.Update(graphics.GraphicsDevice);
-            }
-
-            LoadAsteroids(); //volanie metódy na generovanie asteroidov
-
+            score = coinCount * 100;
             //Inputy z klávesnice
             var ks = Keyboard.GetState();
-
-            //Pohyb lode
-            if (ks.IsKeyDown(Keys.Up))
-            {
-                rocketPosition.Y -= rocketSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-
-            if (ks.IsKeyDown(Keys.Down))
-            {
-                rocketPosition.Y += rocketSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-
-            if (ks.IsKeyDown(Keys.Left))
-            {
-                rocketPosition.X -= rocketSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-
-            if (ks.IsKeyDown(Keys.Right))
-            {
-                rocketPosition.X += rocketSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
 
             //Fullscreen ovládanie klávesnicou F5 (Minecraft)
             if (ks.IsKeyDown(Keys.F5)) {
@@ -147,30 +129,206 @@ namespace p65_72_Al_Alawin_Ali
                 }
             }
 
-            //Exit na esc
-            if (ks.IsKeyDown(Keys.Escape))
-                Exit();
+            //Exit
+            //if (ks.IsKeyDown())
+                //Exit();
 
-            //Raketa nemôže opustiť rozhranie
-            if (rocketPosition.X > graphics.PreferredBackBufferWidth - rocketTexture.Width / 2)
+            if (!gamePaused)
             {
-                rocketPosition.X = graphics.PreferredBackBufferWidth - rocketTexture.Width / 2;
+                //Generovanie asteroidov
+                asteroidSpawn += (float)gameTime.ElapsedGameTime.TotalSeconds; //Asteroid sa pokúša o spawn každú sekundu
+                heartSpawn += (float)gameTime.ElapsedGameTime.TotalMinutes; //Srdiečko sa pokúša o spawn každú minútu
+                coinSpawn += (float)gameTime.ElapsedGameTime.TotalSeconds; //Minca sa pokúša o spawn každú sekundu
+
+
+                // 2 Sekundy nesmrtelnosti (ošetrenie opakovanej kolízie s asteroidom viac krát za sekundu)
+                if (isImmortal)
+                {
+                    immortal += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    rocketColor = Color.Gray;
+                    if( immortal >= 2 ) {
+                        rocketColor = Color.White;                                                        
+                        isImmortal = false;
+                        immortal = 0;
+                    }
+                
+                }
+
+                //update vykreslenia jednotlivých asteroidov
+                foreach (Asteroidy asteroid in asteroids)
+                {
+                    asteroid.Update(graphics.GraphicsDevice);
+                }
+
+                LoadHearts(); //volanie metódny na generovanie srdiečok
+                LoadAsteroids(); //volanie metódy na generovanie asteroidov
+                LoadCoins(); //volanie metódy na generovanie mincí
+
+
+                //Pohyb lode
+                if (!isImmortal)
+                {
+                    if (ks.IsKeyDown(Keys.Up))
+                    {
+                        rocketPosition.Y -= rocketSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    }
+
+                    if (ks.IsKeyDown(Keys.Down))
+                    {
+                        rocketPosition.Y += rocketSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    }
+
+                    if (ks.IsKeyDown(Keys.Left))
+                    {
+                        rocketPosition.X -= rocketSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    }
+
+                    if (ks.IsKeyDown(Keys.Right))
+                    {
+                        rocketPosition.X += rocketSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    }
+                }
+
+
+                //Pause
+                CustomKeyboard.GetState();
+                if (CustomKeyboard.SinglePress(Keys.Escape)) {
+                    gamePaused = true;
+                }
+
+
+                //Raketa nemôže opustiť rozhranie
+                if (rocketPosition.X > graphics.PreferredBackBufferWidth - rocketTexture.Width / 2)
+                {
+                    rocketPosition.X = graphics.PreferredBackBufferWidth - rocketTexture.Width / 2;
+                }
+                else if (rocketPosition.X < rocketTexture.Width / 2)
+                {
+                    rocketPosition.X = rocketTexture.Width / 2;
+                }
+
+                if (rocketPosition.Y > (graphics.PreferredBackBufferHeight - 150) - rocketTexture.Height / 2)
+                {
+                    rocketPosition.Y = (graphics.PreferredBackBufferHeight - 150) - rocketTexture.Height / 2;
+                }
+                else if (rocketPosition.Y < rocketTexture.Height / 2)
+                {
+                    rocketPosition.Y = rocketTexture.Height / 2;
+                }
+
+                base.Update(gameTime);
             }
-            else if (rocketPosition.X < rocketTexture.Width / 2)
+            else
             {
-                rocketPosition.X = rocketTexture.Width / 2;
+                CustomKeyboard.GetState();
+                if (CustomKeyboard.SinglePress(Keys.Escape))
+                {
+                    gamePaused = false;
+                }
+            }
+        }
+
+        public void LoadCoins()
+        {
+            int randX = random.Next(100, 1500);
+            int randY = random.Next(100, 700);
+
+            //Hitbox rakety
+            Rectangle rocketRectangle = new Rectangle(
+                (int)rocketPosition.X,
+                (int)rocketPosition.Y,
+                rocketTexture.Width,
+                rocketTexture.Height
+                );
+
+            //Detekovanie nárazu rakety na mincu
+            for (int ix = 0; ix < coins.Count; ix++)
+            {
+                //Hitbox srdiečka
+                Rectangle coinRectangle = new Rectangle(
+                    (int)coins[ix].position.X,
+                    (int)coins[ix].position.Y,
+                    coinTexture.Width,
+                    coinTexture.Height
+                    );
+
+                if (rocketRectangle.Intersects(coinRectangle))
+                {
+                    coins.RemoveAt(ix);
+                    coinCount++;
+                }
             }
 
-            if (rocketPosition.Y > (graphics.PreferredBackBufferHeight - 150) - rocketTexture.Height / 2)
+            //Spawnovanie mincí
+            if (coinSpawn >= 3)
             {
-                rocketPosition.Y = (graphics.PreferredBackBufferHeight - 150) - rocketTexture.Height / 2;
+                coinSpawn = 0;
+                if (coins.Count < 6)
+                {
+                    coins.Add(
+                        new Coins(
+                            coinTexture,
+                            new Vector2(randX, randY)
+                            )
+                        );
+                }
             }
-            else if (rocketPosition.Y < rocketTexture.Height / 2)
+        }
+
+        public void LoadHearts()
+        {
+            int randX = random.Next(100, 1500);
+            int randY = random.Next(100, 700);
+
+            //Hitbox rakety
+            Rectangle rocketRectangle = new Rectangle(
+                (int)rocketPosition.X,
+                (int)rocketPosition.Y,
+                rocketTexture.Width,
+                rocketTexture.Height
+                );
+
+            //Detekovanie nárazu rakety na srdiečko
+            for (int ix = 0; ix < hearts.Count; ix++)
             {
-                rocketPosition.Y = rocketTexture.Height / 2;
+                //Hitbox srdiečka
+                Rectangle heartRectangle = new Rectangle(
+                    (int)hearts[ix].position.X,
+                    (int)hearts[ix].position.Y,
+                    heartTexture.Width,
+                    heartTexture.Height
+                    );
+
+                if (rocketRectangle.Intersects(heartRectangle))
+                {
+                    hearts.RemoveAt(ix);
+                    if (lifeCount < 3)
+                    {
+                        lifeCount++;
+                    }
+                }
             }
 
-            base.Update(gameTime);
+            //Spawnovanie srdiečok
+            if (heartSpawn >= 1)
+            {
+                heartSpawnOdds = random.Next(0,2); //Šanca na spawn 50%
+                heartSpawn = 0;
+
+                if (heartSpawnOdds == 1)
+                {
+                    if (hearts.Count < 1)
+                    {
+                        hearts.Add(
+                            new Hearts(
+                                heartTexture,
+                                new Vector2(randX, randY)
+                                )
+                            );
+                    }
+                }
+            }
+
         }
 
         public void LoadAsteroids()
@@ -205,18 +363,18 @@ namespace p65_72_Al_Alawin_Ali
                     {
                         rocketPosition.X = graphics.PreferredBackBufferWidth / 2; 
                         rocketPosition.Y = graphics.PreferredBackBufferHeight - 200;
-                        life_count -= 1;
-                        rocketHit = true;
+                        lifeCount -= 1;
                         isImmortal = true;
                     }
 
                 }
             }
 
-            if (asteroidSpawn >= 1)
+            //Spawnovanie asteroidov
+            if (asteroidSpawn >= 0.5)
             {
                 asteroidSpawn = 0;
-                if (asteroids.Count < 10)
+                if (asteroids.Count < 15)
                 {
                     asteroids.Add(
                         new Asteroidy(
@@ -243,18 +401,32 @@ namespace p65_72_Al_Alawin_Ali
         {
 
             // Pozadie
-            if (rocketHit){
-                GraphicsDevice.Clear(Color.Red);
-            }
-            else{
-                GraphicsDevice.Clear(Color.Black);
-            }
-
+            GraphicsDevice.Clear(Color.Black);
+           
             // Kreslenie
             spriteBatch.Begin(); //Otvorenie sprite batchu
 
-            // Pozadie
+            // Pozadie img
             spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 1600, 1000), Color.White);
+
+
+            // Asteroid(y)
+            foreach (Asteroidy asteroid in asteroids)
+            {
+                asteroid.Draw(spriteBatch);
+            }
+
+            // Srdiečko
+            foreach (Hearts heart in hearts)
+            {
+                heart.Draw(spriteBatch);
+            }
+
+            // Mince
+            foreach (Coins coin in coins)
+            {
+                coin.Draw(spriteBatch);
+            }
 
             // Raketa
             spriteBatch.Draw(
@@ -265,52 +437,55 @@ namespace p65_72_Al_Alawin_Ali
                 0f, // Uhol otočenia
                 new Vector2(rocketTexture.Width / 2, rocketTexture.Height / 2),// prenastavenie pozície rakety relatívne na stred namiesto na roh
                 Vector2.One,// Veľkosť (scale)
-                SpriteEffects.None,// Efekty spritov 
-                layer); // hĺbka vo vrstvách
-
-            // Asteroid(y)
-            foreach (Asteroidy asteroid in asteroids)
-            {
-                asteroid.Draw(spriteBatch);
-            }
-
+                SpriteEffects.None,// Flip 
+                0f); // hĺbka vo vrstvách
 
             // InfoPanel
             spriteBatch.Draw(panelTexture, new Rectangle(300, 850, 1000, 150), Color.White);
 
+            //Skóre
+            spriteBatch.DrawString(font, "Score: " + score, new Vector2(900, 895), Color.Black);
 
             // Životy
-            if (life_count == 3)
+            switch (lifeCount)
             {
-                for (int i = 650; i <= 850; i += 100)
-                {
-                    spriteBatch.Draw(heartTexture, new Rectangle(i, 885, 80, 80), Color.White);
-                }
-            }
-            if (life_count == 2)
-            {
-                spriteBatch.Draw(spent_heartTexture, new Rectangle(850, 885, 80, 80), Color.White);
-                spriteBatch.Draw(heartTexture, new Rectangle(750, 885, 80, 80), Color.White);
-                spriteBatch.Draw(heartTexture, new Rectangle(650, 885, 80, 80), Color.White);
-            }
-            if (life_count == 1)
-            {
-                spriteBatch.Draw(spent_heartTexture, new Rectangle(850, 885, 80, 80), Color.White);
-                spriteBatch.Draw(spent_heartTexture, new Rectangle(750, 885, 80, 80), Color.White);
-                spriteBatch.Draw(heartTexture, new Rectangle(650, 885, 80, 80), Color.White);
-            }
-            if (life_count == 0)
-            {
-                for (int i = 650; i <= 850; i += 100)
-                {
-                    spriteBatch.Draw(spent_heartTexture, new Rectangle(i, 885, 80, 80), Color.White);
-                }
+                case 0:
+                    for (int i = 400; i <= 600; i += 100)
+                    {
+                        spriteBatch.Draw(spent_heartTexture, new Rectangle(i, 885, 80, 80), Color.White);
+                    }
+
+                    break;
+
+                case 1:
+                    spriteBatch.Draw(spent_heartTexture, new Rectangle(600, 885, 80, 80), Color.White);
+                    spriteBatch.Draw(spent_heartTexture, new Rectangle(500, 885, 80, 80), Color.White);
+                    spriteBatch.Draw(heartTexture, new Rectangle(400, 885, 80, 80), Color.White);
+                    spriteBatch.Draw(hardOverlayTexture, new Rectangle(0, 0, 1600, 1000), Color.White);
+                    break;
+
+                case 2:
+                    spriteBatch.Draw(spent_heartTexture, new Rectangle(600, 885, 80, 80), Color.White);
+                    spriteBatch.Draw(heartTexture, new Rectangle(500, 885, 80, 80), Color.White);
+                    spriteBatch.Draw(heartTexture, new Rectangle(400, 885, 80, 80), Color.White);
+                    spriteBatch.Draw(mildOverlayTexture, new Rectangle(0, 0, 1600, 1000), Color.White);
+                    break;
+
+                case 3:
+                    for (int i = 400; i <= 600; i += 100)
+                    {
+                        spriteBatch.Draw(heartTexture, new Rectangle(i, 885, 80, 80), Color.White);
+                    }
+                    break;
             }
 
-           
-
+            if (gamePaused)
+            {
+                spriteBatch.Draw(pauseTexture,new Rectangle(0, 0, 1600, 1000), Color.White);
+            }
 
             spriteBatch.End(); // Zatvorenie sprite batchu
+
             base.Draw(gameTime);
         }
     }
