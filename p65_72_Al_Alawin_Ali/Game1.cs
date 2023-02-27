@@ -18,6 +18,8 @@ namespace p65_72_Al_Alawin_Ali
         Texture2D panelTexture;
         Texture2D pauseTexture;
         bool isFullScreen = false;
+        bool gamePaused = false;
+        bool gameOver = false;
         SpriteFont font;
         int score = 0;
         
@@ -49,7 +51,6 @@ namespace p65_72_Al_Alawin_Ali
         int lifeCount = 3;
 
         // Ostatné
-        bool gamePaused = false;
         Random random = new Random();
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
@@ -113,27 +114,17 @@ namespace p65_72_Al_Alawin_Ali
 
         protected override void Update(GameTime gameTime) //Prebehne niekoľko krát za sekundu
         {
-            score = coinCount * 100;
+            score = coinCount * 10;
+
             //Inputy z klávesnice
             var ks = Keyboard.GetState();
 
-            //Fullscreen ovládanie klávesnicou F5 (Minecraft)
+            //Fullscreen - F5 (Minecraft)
             if (ks.IsKeyDown(Keys.F5)) {
-                if(isFullScreen == false)
-                {
-                    ControlFullScreenMode(true);
-                }
-                else
-                {
-                    ControlFullScreenMode(false);
-                }
+                 ControlFullScreenMode(!isFullScreen);
             }
 
-            //Exit
-            //if (ks.IsKeyDown())
-                //Exit();
-
-            if (!gamePaused)
+            if (!gamePaused && lifeCount > 0)
             {
                 //Generovanie asteroidov
                 asteroidSpawn += (float)gameTime.ElapsedGameTime.TotalSeconds; //Asteroid sa pokúša o spawn každú sekundu
@@ -218,13 +209,17 @@ namespace p65_72_Al_Alawin_Ali
 
                 base.Update(gameTime);
             }
-            else
+            else if (gamePaused)
             {
                 CustomKeyboard.GetState();
                 if (CustomKeyboard.SinglePress(Keys.Escape))
                 {
                     gamePaused = false;
                 }
+            }
+            else if (lifeCount <= 0)
+            {
+                gameOver = true;
             }
         }
 
@@ -444,7 +439,7 @@ namespace p65_72_Al_Alawin_Ali
             spriteBatch.Draw(panelTexture, new Rectangle(300, 850, 1000, 150), Color.White);
 
             //Skóre
-            spriteBatch.DrawString(font, "Score: " + score, new Vector2(900, 895), Color.Black);
+            spriteBatch.DrawString(font, "Score: " + score, new Vector2(800, 895), Color.Black);
 
             // Životy
             switch (lifeCount)
@@ -483,6 +478,19 @@ namespace p65_72_Al_Alawin_Ali
             {
                 spriteBatch.Draw(pauseTexture,new Rectangle(0, 0, 1600, 1000), Color.White);
             }
+
+            /*if (gameOver)
+            {
+                spriteBatch.Draw(hardOverlayTexture, new Rectangle(0, 0, 1600, 1000), Color.White);
+                spriteBatch.Draw(panelTexture, new Rectangle(
+                    graphics.PreferredBackBufferWidth / 2 - 200,
+                    graphics.PreferredBackBufferHeight / 2 - 100,
+                    graphics.PreferredBackBufferWidth / 2 + 200,
+                    graphics.PreferredBackBufferHeight + 100), Color.White);
+                spriteBatch.DrawString(font, "GAME OVER!" + score, new Vector2(
+                    graphics.PreferredBackBufferWidth/2,
+                    graphics.PreferredBackBufferHeight), Color.Black);
+            }*/
 
             spriteBatch.End(); // Zatvorenie sprite batchu
 

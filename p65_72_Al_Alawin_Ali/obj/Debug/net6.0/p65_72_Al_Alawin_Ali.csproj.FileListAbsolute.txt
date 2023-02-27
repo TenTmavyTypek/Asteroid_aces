@@ -35,3 +35,40 @@ F:\Ali\Csharp\65_72_Al_Alawin_Ali_MONOGAME\p65_72_Al_Alawin_Ali\p65_72_Al_Alawin
 F:\Ali\Csharp\65_72_Al_Alawin_Ali_MONOGAME\p65_72_Al_Alawin_Ali\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\pauseMenu.xnb
 F:\Ali\Csharp\65_72_Al_Alawin_Ali_MONOGAME\p65_72_Al_Alawin_Ali\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\Score.xnb
 F:\Ali\Csharp\65_72_Al_Alawin_Ali_MONOGAME\p65_72_Al_Alawin_Ali\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\font.xnb
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\Score.xnb
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\asteroid.xnb
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\background.xnb
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\coin.xnb
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\font.xnb
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\hardOverlay.xnb
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\heart.xnb
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\mildOverlay.xnb
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\panel.xnb
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\pauseMenu.xnb
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\rocket.xnb
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\spent_heart.xnb
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\p65_72_Al_Alawin_Ali.exe
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\p65_72_Al_Alawin_Ali.deps.json
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\p65_72_Al_Alawin_Ali.runtimeconfig.json
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\p65_72_Al_Alawin_Ali.dll
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\p65_72_Al_Alawin_Ali.pdb
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\MonoGame.Framework.dll
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\runtimes\linux-x64\native\libSDL2-2.0.so.0
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\runtimes\linux-x64\native\libopenal.so.1
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\runtimes\osx\native\libSDL2.dylib
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\runtimes\osx\native\libopenal.1.dylib
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\runtimes\win-x64\native\SDL2.dll
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\runtimes\win-x64\native\soft_oal.dll
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\runtimes\win-x86\native\SDL2.dll
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\runtimes\win-x86\native\soft_oal.dll
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\obj\Debug\net6.0\p65_72_Al_Alawin_Ali.csproj.AssemblyReference.cache
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\obj\Debug\net6.0\p65_72_Al_Alawin_Ali.GeneratedMSBuildEditorConfig.editorconfig
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\obj\Debug\net6.0\p65_72_Al_Alawin_Ali.AssemblyInfoInputs.cache
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\obj\Debug\net6.0\p65_72_Al_Alawin_Ali.AssemblyInfo.cs
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\obj\Debug\net6.0\p65_72_Al_Alawin_Ali.csproj.CoreCompileInputs.cache
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\obj\Debug\net6.0\p65_72_Al_Alawin_Ali.csproj.CopyComplete
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\obj\Debug\net6.0\p65_72_Al_Alawin_Ali.dll
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\obj\Debug\net6.0\refint\p65_72_Al_Alawin_Ali.dll
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\obj\Debug\net6.0\p65_72_Al_Alawin_Ali.pdb
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\obj\Debug\net6.0\p65_72_Al_Alawin_Ali.genruntimeconfig.cache
+D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\obj\Debug\net6.0\ref\p65_72_Al_Alawin_Ali.dll
