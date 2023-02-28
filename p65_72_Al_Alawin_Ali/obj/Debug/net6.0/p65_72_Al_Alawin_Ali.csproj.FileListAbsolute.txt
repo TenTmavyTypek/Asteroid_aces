@@ -72,3 +72,44 @@ D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\obj\Debug\net6.0\refint\p65_72_Al_
 D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\obj\Debug\net6.0\p65_72_Al_Alawin_Ali.pdb
 D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\obj\Debug\net6.0\p65_72_Al_Alawin_Ali.genruntimeconfig.cache
 D:\Al Alawin\Rocket_game\p65_72_Al_Alawin_Ali\obj\Debug\net6.0\ref\p65_72_Al_Alawin_Ali.dll
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\Score.xnb
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\asteroid.xnb
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\background.xnb
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\coin.xnb
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\font.xnb
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\hardOverlay.xnb
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\heart.xnb
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\mildOverlay.xnb
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\panel.xnb
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\pauseMenu.xnb
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\rocket.xnb
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\spent_heart.xnb
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\p65_72_Al_Alawin_Ali.exe
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\p65_72_Al_Alawin_Ali.deps.json
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\p65_72_Al_Alawin_Ali.runtimeconfig.json
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\p65_72_Al_Alawin_Ali.dll
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\p65_72_Al_Alawin_Ali.pdb
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\MonoGame.Framework.dll
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\runtimes\linux-x64\native\libSDL2-2.0.so.0
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\runtimes\linux-x64\native\libopenal.so.1
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\runtimes\osx\native\libSDL2.dylib
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\runtimes\osx\native\libopenal.1.dylib
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\runtimes\win-x64\native\SDL2.dll
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\runtimes\win-x64\native\soft_oal.dll
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\runtimes\win-x86\native\SDL2.dll
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\runtimes\win-x86\native\soft_oal.dll
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\obj\Debug\net6.0\p65_72_Al_Alawin_Ali.csproj.AssemblyReference.cache
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\obj\Debug\net6.0\p65_72_Al_Alawin_Ali.GeneratedMSBuildEditorConfig.editorconfig
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\obj\Debug\net6.0\p65_72_Al_Alawin_Ali.AssemblyInfoInputs.cache
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\obj\Debug\net6.0\p65_72_Al_Alawin_Ali.AssemblyInfo.cs
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\obj\Debug\net6.0\p65_72_Al_Alawin_Ali.csproj.CoreCompileInputs.cache
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\obj\Debug\net6.0\p65_72_Al_Alawin_Ali.csproj.CopyComplete
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\obj\Debug\net6.0\p65_72_Al_Alawin_Ali.dll
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\obj\Debug\net6.0\refint\p65_72_Al_Alawin_Ali.dll
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\obj\Debug\net6.0\p65_72_Al_Alawin_Ali.pdb
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\obj\Debug\net6.0\p65_72_Al_Alawin_Ali.genruntimeconfig.cache
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\obj\Debug\net6.0\ref\p65_72_Al_Alawin_Ali.dll
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\endgame.xnb
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\gameoverMenu.xnb
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\play.xnb
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\playagain.xnb

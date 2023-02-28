@@ -15,6 +15,10 @@ namespace p65_72_Al_Alawin_Ali
         Texture2D backgroundTexture;
         Texture2D mildOverlayTexture;
         Texture2D hardOverlayTexture;
+        Texture2D playButton;
+        Texture2D endgameButton;
+        Texture2D playagainButton;
+        Texture2D gameoverTexture;
         Texture2D panelTexture;
         Texture2D pauseTexture;
         bool isFullScreen = false;
@@ -92,7 +96,11 @@ namespace p65_72_Al_Alawin_Ali
             panelTexture = Content.Load<Texture2D>("panel");
             pauseTexture = Content.Load<Texture2D>("pauseMenu");
             font = Content.Load<SpriteFont>("font");
-            
+            playButton = Content.Load<Texture2D>("play");
+            endgameButton = Content.Load<Texture2D>("endgame");
+            playagainButton = Content.Load<Texture2D>("playagain");
+            gameoverTexture = Content.Load<Texture2D>("gameoverMenu");
+
             // Životy
             heartTexture = Content.Load<Texture2D>("heart");
             spent_heartTexture = Content.Load<Texture2D>("spent_heart");
@@ -479,18 +487,13 @@ namespace p65_72_Al_Alawin_Ali
                 spriteBatch.Draw(pauseTexture,new Rectangle(0, 0, 1600, 1000), Color.White);
             }
 
-            /*if (gameOver)
+            if (gameOver)
             {
-                spriteBatch.Draw(hardOverlayTexture, new Rectangle(0, 0, 1600, 1000), Color.White);
-                spriteBatch.Draw(panelTexture, new Rectangle(
-                    graphics.PreferredBackBufferWidth / 2 - 200,
-                    graphics.PreferredBackBufferHeight / 2 - 100,
-                    graphics.PreferredBackBufferWidth / 2 + 200,
-                    graphics.PreferredBackBufferHeight + 100), Color.White);
-                spriteBatch.DrawString(font, "GAME OVER!" + score, new Vector2(
-                    graphics.PreferredBackBufferWidth/2,
-                    graphics.PreferredBackBufferHeight), Color.Black);
-            }*/
+                spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 1600, 1000), Color.White);
+                spriteBatch.Draw(gameoverTexture, new Rectangle(0, 0, 1600, 1000), Color.White);
+                spriteBatch.Draw(playagainButton, new Vector2(460, 850), Color.White);
+                spriteBatch.Draw(endgameButton, new Vector2(1150, 850), Color.White);
+            }
 
             spriteBatch.End(); // Zatvorenie sprite batchu
 
