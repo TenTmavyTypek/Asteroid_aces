@@ -6,6 +6,9 @@ using System;
 using System.Security.Cryptography.X509Certificates;
 using static System.Formats.Asn1.AsnWriter;
 using System.Threading.Tasks.Sources;
+using System.IO;
+using System.Xml.Linq;
+using System.Transactions;
 
 namespace p65_72_Al_Alawin_Ali
 {
@@ -31,6 +34,7 @@ namespace p65_72_Al_Alawin_Ali
         bool gamePaused = false;
         bool gameOver = false;
         int score = 0;
+        int bestScore = 0;
 
 
         // Raketa
@@ -60,7 +64,7 @@ namespace p65_72_Al_Alawin_Ali
         bool isImmortal = false;
         int lifeCount = 3;
 
-        // Ostatné
+        // Ostatné 
         Random random = new Random();
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
@@ -92,8 +96,10 @@ namespace p65_72_Al_Alawin_Ali
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice); //Načítanie sprite batchu -- obsahuje metódy na kreslenie
-
-            //Načítanie obrázkov
+            
+            StreamReader saveRead = new StreamReader("savefile.txt");
+            bestScore = Convert.ToInt32(saveRead.ReadLine());
+            saveRead.Close();
 
             // UI
             backgroundTexture = Content.Load<Texture2D>("background");
@@ -130,7 +136,13 @@ namespace p65_72_Al_Alawin_Ali
 
         protected override void Update(GameTime gameTime) //Prebehne niekoľko krát za sekundu
         {
+
             score = coinCount * 10;
+            
+            if(bestScore < score)
+            {
+                bestScore = score;
+            }
 
             //Inputy z klávesnice
             var ks = Keyboard.GetState();
@@ -240,6 +252,13 @@ namespace p65_72_Al_Alawin_Ali
             }
             else if (lifeCount <= 0)
             {
+                FileStream fs = new FileStream("savefile.txt", FileMode.Create);
+                StreamWriter save = new StreamWriter(fs);
+                save.WriteLine(Convert.ToString(bestScore));
+                save.Close();
+
+                
+
                 gameOver = true;
                 LoadEndgameButton();
             }
@@ -606,8 +625,8 @@ namespace p65_72_Al_Alawin_Ali
             {
                 spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 1600, 1000), Color.White);
                 spriteBatch.Draw(gameoverTexture, new Rectangle(0, 0, 1600, 1000), Color.White);
-                spriteBatch.DrawString(font, "New score: " + score, new Vector2(120, 350), Color.Black);
-                spriteBatch.DrawString(font, "Best score: " + score, new Vector2(120, 350), Color.Black);
+                spriteBatch.DrawString(font, "Your score : " + score, new Vector2(120, 380), Color.Black);
+                spriteBatch.DrawString(font, "Best score ever : " + bestScore, new Vector2(120, 520), Color.Black);
 
 
                 spriteBatch.Draw(playagainButtonTexture, new Vector2(200, 800), Color.White);
