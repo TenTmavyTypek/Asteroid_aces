@@ -113,3 +113,5 @@ F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\endgame.xnb
 F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\gameoverMenu.xnb
 F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\play.xnb
 F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\playagain.xnb
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\exit.xnb
+F:\Ali\Csharp\prg\p65_72_Al_Alawin_Ali\bin\Debug\net6.0\Content\startMenu.xnb

@@ -8,6 +8,7 @@
     <File>F:/Ali/Csharp/prg/p65_72_Al_Alawin_Ali/Content/background.png</File>
     <File>F:/Ali/Csharp/prg/p65_72_Al_Alawin_Ali/Content/coin.png</File>
     <File>F:/Ali/Csharp/prg/p65_72_Al_Alawin_Ali/Content/endgame.png</File>
+    <File>F:/Ali/Csharp/prg/p65_72_Al_Alawin_Ali/Content/exit.png</File>
     <File>F:/Ali/Csharp/prg/p65_72_Al_Alawin_Ali/Content/font.spritefont</File>
     <File>F:/Ali/Csharp/prg/p65_72_Al_Alawin_Ali/Content/gameoverMenu.png</File>
     <File>F:/Ali/Csharp/prg/p65_72_Al_Alawin_Ali/Content/hardOverlay.png</File>
@@ -19,8 +20,11 @@
     <File>F:/Ali/Csharp/prg/p65_72_Al_Alawin_Ali/Content/playagain.png</File>
     <File>F:/Ali/Csharp/prg/p65_72_Al_Alawin_Ali/Content/rocket.png</File>
     <File>F:/Ali/Csharp/prg/p65_72_Al_Alawin_Ali/Content/spent_heart.png</File>
+    <File>F:/Ali/Csharp/prg/p65_72_Al_Alawin_Ali/Content/startMenu.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

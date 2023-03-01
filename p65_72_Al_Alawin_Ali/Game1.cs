@@ -12,21 +12,27 @@ namespace p65_72_Al_Alawin_Ali
     public class Game1 : Game
     {
         // User Interface
+        MouseState currentMouse;
+        MouseState previousMouse;
         Texture2D backgroundTexture;
         Texture2D mildOverlayTexture;
         Texture2D hardOverlayTexture;
-        Texture2D playButton;
-        Texture2D endgameButton;
-        Texture2D playagainButton;
+        Texture2D playButtonTexture;
+        Texture2D exitButtonTexture;
+        Texture2D endgameButtonTexture;
+        Texture2D playagainButtonTexture;
         Texture2D gameoverTexture;
         Texture2D panelTexture;
         Texture2D pauseTexture;
+        Texture2D startTexture;
+        SpriteFont font;
         bool isFullScreen = false;
+        bool gameStarted = false;
         bool gamePaused = false;
         bool gameOver = false;
-        SpriteFont font;
         int score = 0;
-        
+
+
         // Raketa
         Texture2D rocketTexture;
         Vector2 rocketPosition;
@@ -37,7 +43,7 @@ namespace p65_72_Al_Alawin_Ali
         List<Asteroidy> asteroids = new List<Asteroidy>();
         Texture2D asteroidTexture;
         float asteroidSpawn = 0;
-        
+
         // Mince
         List<Coins> coins = new List<Coins>();
         Texture2D coinTexture;
@@ -96,10 +102,12 @@ namespace p65_72_Al_Alawin_Ali
             panelTexture = Content.Load<Texture2D>("panel");
             pauseTexture = Content.Load<Texture2D>("pauseMenu");
             font = Content.Load<SpriteFont>("font");
-            playButton = Content.Load<Texture2D>("play");
-            endgameButton = Content.Load<Texture2D>("endgame");
-            playagainButton = Content.Load<Texture2D>("playagain");
+            playButtonTexture = Content.Load<Texture2D>("play");
+            endgameButtonTexture = Content.Load<Texture2D>("endgame");
+            playagainButtonTexture = Content.Load<Texture2D>("playagain");
             gameoverTexture = Content.Load<Texture2D>("gameoverMenu");
+            exitButtonTexture = Content.Load<Texture2D>("exit");
+            startTexture = Content.Load<Texture2D>("startMenu");
 
             // Životy
             heartTexture = Content.Load<Texture2D>("heart");
@@ -129,10 +137,10 @@ namespace p65_72_Al_Alawin_Ali
 
             //Fullscreen - F5 (Minecraft)
             if (ks.IsKeyDown(Keys.F5)) {
-                 ControlFullScreenMode(!isFullScreen);
+                ControlFullScreenMode(!isFullScreen);
             }
 
-            if (!gamePaused && lifeCount > 0)
+            if (!gamePaused && lifeCount > 0 && gameStarted)
             {
                 //Generovanie asteroidov
                 asteroidSpawn += (float)gameTime.ElapsedGameTime.TotalSeconds; //Asteroid sa pokúša o spawn každú sekundu
@@ -145,12 +153,12 @@ namespace p65_72_Al_Alawin_Ali
                 {
                     immortal += (float)gameTime.ElapsedGameTime.TotalSeconds;
                     rocketColor = Color.Gray;
-                    if( immortal >= 2 ) {
-                        rocketColor = Color.White;                                                        
+                    if (immortal >= 2) {
+                        rocketColor = Color.White;
                         isImmortal = false;
                         immortal = 0;
                     }
-                
+
                 }
 
                 //update vykreslenia jednotlivých asteroidov
@@ -217,8 +225,13 @@ namespace p65_72_Al_Alawin_Ali
 
                 base.Update(gameTime);
             }
+            else if (!gameStarted)
+            {
+                LoadPlayButton();
+            }
             else if (gamePaused)
             {
+                LoadPlayButton();
                 CustomKeyboard.GetState();
                 if (CustomKeyboard.SinglePress(Keys.Escape))
                 {
@@ -228,8 +241,10 @@ namespace p65_72_Al_Alawin_Ali
             else if (lifeCount <= 0)
             {
                 gameOver = true;
+                LoadEndgameButton();
             }
         }
+
 
         public void LoadCoins()
         {
@@ -315,7 +330,7 @@ namespace p65_72_Al_Alawin_Ali
             //Spawnovanie srdiečok
             if (heartSpawn >= 1)
             {
-                heartSpawnOdds = random.Next(0,2); //Šanca na spawn 50%
+                heartSpawnOdds = random.Next(0, 2); //Šanca na spawn 50%
                 heartSpawn = 0;
 
                 if (heartSpawnOdds == 1)
@@ -342,15 +357,15 @@ namespace p65_72_Al_Alawin_Ali
 
             //Hitbox rakety
             Rectangle rocketRectangle = new Rectangle(
-                (int)rocketPosition.X ,
-                (int)rocketPosition.Y ,
+                (int)rocketPosition.X,
+                (int)rocketPosition.Y,
                 rocketTexture.Width,
                 rocketTexture.Height
                 );
 
-            
+
             //Detekovanie nárazu rakety na asteroid
-            for (int ix = 0;  ix < asteroids.Count; ix++)
+            for (int ix = 0; ix < asteroids.Count; ix++)
             {
                 //Hitbox asteroidu
                 Rectangle asteroidRectangle = new Rectangle(
@@ -362,9 +377,9 @@ namespace p65_72_Al_Alawin_Ali
 
                 if (rocketRectangle.Intersects(asteroidRectangle))
                 {
-                    if(!isImmortal)
+                    if (!isImmortal)
                     {
-                        rocketPosition.X = graphics.PreferredBackBufferWidth / 2; 
+                        rocketPosition.X = graphics.PreferredBackBufferWidth / 2;
                         rocketPosition.Y = graphics.PreferredBackBufferHeight - 200;
                         lifeCount -= 1;
                         isImmortal = true;
@@ -396,6 +411,97 @@ namespace p65_72_Al_Alawin_Ali
                         asteroids.RemoveAt(i);
                         i--;
                     }
+                }
+            }
+        }
+        public void LoadPlayButton()
+        {
+            previousMouse = currentMouse;
+            currentMouse = Mouse.GetState();
+            Rectangle mouseRectangle = new Rectangle(
+                currentMouse.X,
+                currentMouse.Y,
+                1,
+                1);
+
+            Rectangle playButtonRectangle = new Rectangle(
+                520,
+                340,
+                520,
+                160
+                );
+
+            Rectangle exitButtonRectangle = new Rectangle(
+                520,
+                600,
+                520,
+                160
+                );
+            if (mouseRectangle.Intersects(playButtonRectangle))
+            {
+                if (currentMouse.LeftButton == ButtonState.Released && previousMouse.LeftButton == ButtonState.Pressed)
+                {
+                    gameStarted = true;
+                    gamePaused = false;
+                }
+            }
+            if (mouseRectangle.Intersects(exitButtonRectangle))
+            {
+                if (currentMouse.LeftButton == ButtonState.Released && previousMouse.LeftButton == ButtonState.Pressed)
+                {
+                    Exit();
+                }
+            }
+
+        }
+
+        public void LoadEndgameButton()
+        {
+            previousMouse = currentMouse;
+            currentMouse = Mouse.GetState();
+            Rectangle mouseRectangle = new Rectangle(
+                currentMouse.X,
+                currentMouse.Y,
+                1,
+                1);
+
+            Rectangle endgameButtonRectangle = new Rectangle(
+                890,
+                800,
+                520,
+                160
+                );
+
+            Rectangle playAgainButtonRectangle = new Rectangle(
+                200,
+                800,
+                520,
+                160
+                );
+
+            if (mouseRectangle.Intersects( endgameButtonRectangle ) )
+            {
+                if (currentMouse.LeftButton == ButtonState.Released && previousMouse.LeftButton == ButtonState.Pressed) {
+                    Exit();
+                }
+            }
+            if (mouseRectangle.Intersects(playAgainButtonRectangle))
+            {
+                if (currentMouse.LeftButton == ButtonState.Released && previousMouse.LeftButton == ButtonState.Pressed)
+                {
+                    rocketPosition.X = graphics.PreferredBackBufferWidth / 2;
+                    rocketPosition.Y = graphics.PreferredBackBufferHeight - 200;
+                    score = 0;
+                    coinCount = 0;
+
+                    asteroids.Clear();
+                    coins.Clear();
+
+                    immortal = 0;
+                    isImmortal = false;
+                    gameOver = false;
+                    gamePaused = false;
+                    lifeCount = 3;
                 }
             }
         }
@@ -485,14 +591,28 @@ namespace p65_72_Al_Alawin_Ali
             if (gamePaused)
             {
                 spriteBatch.Draw(pauseTexture,new Rectangle(0, 0, 1600, 1000), Color.White);
+                spriteBatch.Draw(playButtonTexture, new Vector2(520, 340), Color.White);
+                spriteBatch.Draw(exitButtonTexture, new Vector2(520, 600), Color.White);
+            }
+
+            if (!gameStarted)
+            {
+                spriteBatch.Draw(startTexture, new Rectangle(0, 0, 1600, 1000), Color.White);
+                spriteBatch.Draw(playButtonTexture, new Vector2(520, 340), Color.White);
+                spriteBatch.Draw(exitButtonTexture, new Vector2(520, 600), Color.White);
             }
 
             if (gameOver)
             {
                 spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 1600, 1000), Color.White);
                 spriteBatch.Draw(gameoverTexture, new Rectangle(0, 0, 1600, 1000), Color.White);
-                spriteBatch.Draw(playagainButton, new Vector2(460, 850), Color.White);
-                spriteBatch.Draw(endgameButton, new Vector2(1150, 850), Color.White);
+                spriteBatch.DrawString(font, "New score: " + score, new Vector2(120, 350), Color.Black);
+                spriteBatch.DrawString(font, "Best score: " + score, new Vector2(120, 350), Color.Black);
+
+
+                spriteBatch.Draw(playagainButtonTexture, new Vector2(200, 800), Color.White);
+                spriteBatch.Draw(endgameButtonTexture, new Vector2(890, 800), Color.White);
+
             }
 
             spriteBatch.End(); // Zatvorenie sprite batchu
