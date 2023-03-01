@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Ali\\Csharp\\prg\\p65_72_Al_Alawin_Ali\\p65_72_Al_Alawin_Ali.csproj": {}
+    "D:\\Al_Alawin\\projekt\\p_65_72_Al_Alawin_Ali\\p65_72_Al_Alawin_Ali\\p65_72_Al_Alawin_Ali.csproj": {}
   },
   "projects": {
-    "F:\\Ali\\Csharp\\prg\\p65_72_Al_Alawin_Ali\\p65_72_Al_Alawin_Ali.csproj": {
+    "D:\\Al_Alawin\\projekt\\p_65_72_Al_Alawin_Ali\\p65_72_Al_Alawin_Ali\\p65_72_Al_Alawin_Ali.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Ali\\Csharp\\prg\\p65_72_Al_Alawin_Ali\\p65_72_Al_Alawin_Ali.csproj",
+        "projectUniqueName": "D:\\Al_Alawin\\projekt\\p_65_72_Al_Alawin_Ali\\p65_72_Al_Alawin_Ali\\p65_72_Al_Alawin_Ali.csproj",
         "projectName": "p65_72_Al_Alawin_Ali",
-        "projectPath": "F:\\Ali\\Csharp\\prg\\p65_72_Al_Alawin_Ali\\p65_72_Al_Alawin_Ali.csproj",
-        "packagesPath": "C:\\Users\\alala\\.nuget\\packages\\",
-        "outputPath": "F:\\Ali\\Csharp\\prg\\p65_72_Al_Alawin_Ali\\obj\\",
+        "projectPath": "D:\\Al_Alawin\\projekt\\p_65_72_Al_Alawin_Ali\\p65_72_Al_Alawin_Ali\\p65_72_Al_Alawin_Ali.csproj",
+        "packagesPath": "C:\\Users\\AliAlAlawin\\.nuget\\packages\\",
+        "outputPath": "D:\\Al_Alawin\\projekt\\p_65_72_Al_Alawin_Ali\\p65_72_Al_Alawin_Ali\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\alala\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\AliAlAlawin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -65,7 +69,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

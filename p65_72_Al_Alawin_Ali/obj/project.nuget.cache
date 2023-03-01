@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "JUG0LZvDYsOW/KI7uyvB/uVW6tUsQoCg/6tmXbVeUrx70TBjCXWckp7HGC/dNcYIfXUe3Fu/IFXoU3LezIMuFA==",
+  "dgSpecHash": "OFfPjZb9e/LA/5akMwTOtPtnuqWJFhLXr3sNSljLglaYmtAHDRAuqB2HePU596SxvBETJ1QwooYoKIU+U7PZhg==",
   "success": true,
-  "projectFilePath": "F:\\Ali\\Csharp\\prg\\p65_72_Al_Alawin_Ali\\p65_72_Al_Alawin_Ali.csproj",
+  "projectFilePath": "D:\\Al_Alawin\\projekt\\p_65_72_Al_Alawin_Ali\\p65_72_Al_Alawin_Ali\\p65_72_Al_Alawin_Ali.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\alala\\.nuget\\packages\\monogame.content.builder.task\\3.8.1.303\\monogame.content.builder.task.3.8.1.303.nupkg.sha512",
-    "C:\\Users\\alala\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.1.303\\monogame.framework.desktopgl.3.8.1.303.nupkg.sha512"
+    "C:\\Users\\AliAlAlawin\\.nuget\\packages\\monogame.content.builder.task\\3.8.1.303\\monogame.content.builder.task.3.8.1.303.nupkg.sha512",
+    "C:\\Users\\AliAlAlawin\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.1.303\\monogame.framework.desktopgl.3.8.1.303.nupkg.sha512"
   ],
   "logs": []
 }

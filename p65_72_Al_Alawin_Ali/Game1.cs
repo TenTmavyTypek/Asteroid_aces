@@ -17,18 +17,18 @@ namespace p65_72_Al_Alawin_Ali
         // User Interface
         MouseState currentMouse;
         MouseState previousMouse;
-        Texture2D backgroundTexture;
+        SpriteFont font;
+        Texture2D playagainButtonTexture;
+        Texture2D endgameButtonTexture;
         Texture2D mildOverlayTexture;
         Texture2D hardOverlayTexture;
+        Texture2D backgroundTexture;
         Texture2D playButtonTexture;
         Texture2D exitButtonTexture;
-        Texture2D endgameButtonTexture;
-        Texture2D playagainButtonTexture;
         Texture2D gameoverTexture;
         Texture2D panelTexture;
         Texture2D pauseTexture;
         Texture2D startTexture;
-        SpriteFont font;
         bool isFullScreen = false;
         bool gameStarted = false;
         bool gamePaused = false;
@@ -97,23 +97,34 @@ namespace p65_72_Al_Alawin_Ali
         {
             spriteBatch = new SpriteBatch(GraphicsDevice); //Načítanie sprite batchu -- obsahuje metódy na kreslenie
             
+            //Prvotné čítanie zo súboru
             StreamReader saveRead = new StreamReader("savefile.txt");
             bestScore = Convert.ToInt32(saveRead.ReadLine());
             saveRead.Close();
 
-            // UI
-            backgroundTexture = Content.Load<Texture2D>("background");
+            
+
+            //Tlačidlá
+            playagainButtonTexture = Content.Load<Texture2D>("playagain");
+            endgameButtonTexture = Content.Load<Texture2D>("endgame");
+            playButtonTexture = Content.Load<Texture2D>("play");
+            exitButtonTexture = Content.Load<Texture2D>("exit");
+
+            //Efekty 
             hardOverlayTexture = Content.Load<Texture2D>("hardOverlay");
             mildOverlayTexture = Content.Load<Texture2D>("mildOverlay");
-            panelTexture = Content.Load<Texture2D>("panel");
+
+            //Pozadia
+            backgroundTexture = Content.Load<Texture2D>("background");
             pauseTexture = Content.Load<Texture2D>("pauseMenu");
-            font = Content.Load<SpriteFont>("font");
-            playButtonTexture = Content.Load<Texture2D>("play");
-            endgameButtonTexture = Content.Load<Texture2D>("endgame");
-            playagainButtonTexture = Content.Load<Texture2D>("playagain");
-            gameoverTexture = Content.Load<Texture2D>("gameoverMenu");
-            exitButtonTexture = Content.Load<Texture2D>("exit");
             startTexture = Content.Load<Texture2D>("startMenu");
+
+            //Overlay
+            gameoverTexture = Content.Load<Texture2D>("gameoverMenu");
+            panelTexture = Content.Load<Texture2D>("panel");
+
+            //Fonty
+            font = Content.Load<SpriteFont>("font");
 
             // Životy
             heartTexture = Content.Load<Texture2D>("heart");
@@ -127,6 +138,7 @@ namespace p65_72_Al_Alawin_Ali
             coinTexture = Content.Load<Texture2D>("coin");
         }
 
+        //Prepnutie na fullscreen
         void ControlFullScreenMode(bool becomeFullscreen)
         {
             graphics.IsFullScreen = becomeFullscreen;
@@ -136,9 +148,10 @@ namespace p65_72_Al_Alawin_Ali
 
         protected override void Update(GameTime gameTime) //Prebehne niekoľko krát za sekundu
         {
-
+            //Počítanie score podľa nazbieraných mincí
             score = coinCount * 10;
             
+            //Prepisovanie bestScore
             if(bestScore < score)
             {
                 bestScore = score;
@@ -252,10 +265,12 @@ namespace p65_72_Al_Alawin_Ali
             }
             else if (lifeCount <= 0)
             {
+                //Zápis do súboru
                 FileStream fs = new FileStream("savefile.txt", FileMode.Create);
                 StreamWriter save = new StreamWriter(fs);
                 save.WriteLine(Convert.ToString(bestScore));
                 save.Close();
+                //Koniec zápisu
 
                 
 
@@ -265,6 +280,7 @@ namespace p65_72_Al_Alawin_Ali
         }
 
 
+        //Generovanie mincí + hitboxy
         public void LoadCoins()
         {
             int randX = random.Next(100, 1500);
@@ -312,6 +328,7 @@ namespace p65_72_Al_Alawin_Ali
             }
         }
 
+        //Generovanie srdiečok + hitboxy
         public void LoadHearts()
         {
             int randX = random.Next(100, 1500);
@@ -368,13 +385,14 @@ namespace p65_72_Al_Alawin_Ali
 
         }
 
+        //Generovanie asteroidov + hitboxy
         public void LoadAsteroids()
         {
             asteroidTexture = Content.Load<Texture2D>("asteroid");
             int randX = random.Next(0, 1600);
             int Y = -50;
 
-            //Hitbox rakety
+            //  Hitbox rakety
             Rectangle rocketRectangle = new Rectangle(
                 (int)rocketPosition.X,
                 (int)rocketPosition.Y,
@@ -383,10 +401,10 @@ namespace p65_72_Al_Alawin_Ali
                 );
 
 
-            //Detekovanie nárazu rakety na asteroid
+            //  Detekovanie nárazu rakety na asteroid
             for (int ix = 0; ix < asteroids.Count; ix++)
             {
-                //Hitbox asteroidu
+                //  Hitbox asteroidu
                 Rectangle asteroidRectangle = new Rectangle(
                     (int)asteroids[ix].position.X,
                     (int)asteroids[ix].position.Y,
@@ -407,7 +425,7 @@ namespace p65_72_Al_Alawin_Ali
                 }
             }
 
-            //Spawnovanie asteroidov
+            //  Spawnovanie asteroidov
             if (asteroidSpawn >= 0.5)
             {
                 asteroidSpawn = 0;
@@ -424,7 +442,7 @@ namespace p65_72_Al_Alawin_Ali
 
                 for (int i = 0; i < asteroids.Count; i++)
                 {
-                    //Odstránenie z listu po odídení z okna
+                    //  Odstránenie z listu po odídení z okna
                     if (!asteroids[i].isVisible)
                     {
                         asteroids.RemoveAt(i);
@@ -433,6 +451,8 @@ namespace p65_72_Al_Alawin_Ali
                 }
             }
         }
+
+        //  "Hitboxy tlačidiel play a exit + riešenie kliku na ne"
         public void LoadPlayButton()
         {
             previousMouse = currentMouse;
@@ -456,6 +476,7 @@ namespace p65_72_Al_Alawin_Ali
                 520,
                 160
                 );
+
             if (mouseRectangle.Intersects(playButtonRectangle))
             {
                 if (currentMouse.LeftButton == ButtonState.Released && previousMouse.LeftButton == ButtonState.Pressed)
@@ -474,6 +495,7 @@ namespace p65_72_Al_Alawin_Ali
 
         }
 
+        //  "Hitboxy tlačidiel play again a end game + riešenie kliku na ne"
         public void LoadEndgameButton()
         {
             previousMouse = currentMouse;
@@ -504,6 +526,8 @@ namespace p65_72_Al_Alawin_Ali
                     Exit();
                 }
             }
+
+            //  Logika "reštartu hry"
             if (mouseRectangle.Intersects(playAgainButtonRectangle))
             {
                 if (currentMouse.LeftButton == ButtonState.Released && previousMouse.LeftButton == ButtonState.Pressed)
@@ -568,13 +592,13 @@ namespace p65_72_Al_Alawin_Ali
                 SpriteEffects.None,// Flip 
                 0f); // hĺbka vo vrstvách
 
-            // InfoPanel
+            //  InfoPanel
             spriteBatch.Draw(panelTexture, new Rectangle(300, 850, 1000, 150), Color.White);
 
-            //Skóre
+            //  Skóre
             spriteBatch.DrawString(font, "Score: " + score, new Vector2(800, 895), Color.Black);
 
-            // Životy
+            //  Životy
             switch (lifeCount)
             {
                 case 0:
@@ -607,6 +631,7 @@ namespace p65_72_Al_Alawin_Ali
                     break;
             }
 
+            //  Pause menu
             if (gamePaused)
             {
                 spriteBatch.Draw(pauseTexture,new Rectangle(0, 0, 1600, 1000), Color.White);
@@ -614,27 +639,35 @@ namespace p65_72_Al_Alawin_Ali
                 spriteBatch.Draw(exitButtonTexture, new Vector2(520, 600), Color.White);
             }
 
+            //  Úvodné menu
             if (!gameStarted)
             {
+                //  Pozadie
                 spriteBatch.Draw(startTexture, new Rectangle(0, 0, 1600, 1000), Color.White);
+
+                //  Tlačidlá
                 spriteBatch.Draw(playButtonTexture, new Vector2(520, 340), Color.White);
                 spriteBatch.Draw(exitButtonTexture, new Vector2(520, 600), Color.White);
             }
 
+            //  Game over menu
             if (gameOver)
             {
+                //  Pozadie
                 spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 1600, 1000), Color.White);
                 spriteBatch.Draw(gameoverTexture, new Rectangle(0, 0, 1600, 1000), Color.White);
+
+                //  Score text
                 spriteBatch.DrawString(font, "Your score : " + score, new Vector2(120, 380), Color.Black);
                 spriteBatch.DrawString(font, "Best score ever : " + bestScore, new Vector2(120, 520), Color.Black);
 
-
+                //  Tlačidlá
                 spriteBatch.Draw(playagainButtonTexture, new Vector2(200, 800), Color.White);
                 spriteBatch.Draw(endgameButtonTexture, new Vector2(890, 800), Color.White);
 
             }
 
-            spriteBatch.End(); // Zatvorenie sprite batchu
+            spriteBatch.End(); //   Zatvorenie sprite batchu
 
             base.Draw(gameTime);
         }
