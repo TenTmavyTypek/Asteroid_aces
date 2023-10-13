@@ -14,8 +14,9 @@
 **Location of the Executable:**
 - You can find the game executable (p65_72_Al_Alawin_Ali.exe) in the 'p65_72_Al_Alawin_Ali/bin/Debug/net6.0' folder.
 
-*Disclaimer: This game was created as a school project, and I do not own any rights to the pictures used as sprites.*
 
+*Disclaimer: This game was created as a school project, and I do not own any rights to the pictures used as sprites.*
 *Apology: I apologize for the unconventional and confusing folder names, which were required for my school project.*
 
-# Unleash your inner 'Asteroid Ace' and explore the infinite reaches of the galaxy in this action-packed journey.
+
+***Unleash your inner 'Asteroid Ace' and explore the infinite reaches of the galaxy in this action-packed journey.***
