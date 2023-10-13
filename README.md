@@ -8,4 +8,6 @@
 - Every playthrough offers a chance to outperform your previous scores.
 - A score table showcases your achievements at the end, motivating you to aim higher with each new adventure.
 
+*Disclaimer: This game was created as a school project, and I do not own any rights to the pictures used as sprites.*
+
 Unleash your inner 'Asteroid Ace' and explore the infinite reaches of the galaxy in this action-packed journey.
