@@ -18,4 +18,4 @@
 
 *Apology: I apologize for the unconventional and confusing folder names, which were required for my school project.*
 
-Unleash your inner 'Asteroid Ace' and explore the infinite reaches of the galaxy in this action-packed journey.
+# Unleash your inner 'Asteroid Ace' and explore the infinite reaches of the galaxy in this action-packed journey.
